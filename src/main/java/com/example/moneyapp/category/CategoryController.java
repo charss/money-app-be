@@ -16,10 +16,12 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepo;
     private CategoryMapper mapper;
+    private CategoryService categoryService;
 
-    public CategoryController(CategoryRepository categoryRepo, CategoryMapper mapper) {
+    public CategoryController(CategoryRepository categoryRepo, CategoryMapper mapper, CategoryService categoryService) {
         this.categoryRepo = categoryRepo;
         this.mapper = mapper;
+        this.categoryService = categoryService;
     }
 
     @GetMapping
@@ -33,5 +35,10 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Category category) {
         return new ResponseEntity<>(categoryRepo.save(category), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}/update")
+    public Category updateCategory(@PathVariable(value = "id") Integer id, @RequestBody Category category) {
+        return this.categoryService.updateCategory(id, category);
     }
 }
