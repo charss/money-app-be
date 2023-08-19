@@ -11,9 +11,11 @@ import java.util.Objects;
 @Service
 public class UserService {
     private UserRepository userRepo;
+    private UserMapper userMapper;
 
-    public UserService(UserRepository userRepo) {
+    public UserService(UserRepository userRepo, UserMapper userMapper) {
         this.userRepo = userRepo;
+        this.userMapper = userMapper;
     }
 
     public UserDto updateUser(Integer id, User updatedUser) {
@@ -28,21 +30,10 @@ public class UserService {
                 user.setFirstName(updatedUser.getFirstName());
                 user.setMiddleName(updatedUser.getMiddleName());
 
-                OffsetDateTime updatedDate = OffsetDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
-                Date date = Date.from(updatedDate.toInstant());
-                user.setUpdatedAt(date);
-
-                this.userRepo.save(user);
+                return this.userMapper.toDto(this.userRepo.save(user));
             }
 
-            return new UserDto(
-                    id,
-                    user.getLastName(),
-                    user.getFirstName(),
-                    user.getMiddleName(),
-                    OffsetDateTime.ofInstant(user.getCreatedAt().toInstant(), ZoneId.systemDefault()),
-                    OffsetDateTime.ofInstant(user.getUpdatedAt().toInstant(), ZoneId.systemDefault())
-            );
+            return this.userMapper.toDto(user);
         } catch (EntityNotFoundException e) {
             return null;
         }
