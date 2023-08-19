@@ -1,6 +1,6 @@
 package com.example.moneyapp.category;
 
-import com.example.moneyapp.account.Account;
+import com.example.moneyapp.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

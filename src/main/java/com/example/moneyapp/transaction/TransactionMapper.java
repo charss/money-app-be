@@ -1,5 +1,6 @@
 package com.example.moneyapp.transaction;
 
+import com.example.moneyapp.entity.Transaction;
 import org.springframework.stereotype.Component;
 
 @Component

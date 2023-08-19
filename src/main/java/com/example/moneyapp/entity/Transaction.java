@@ -1,32 +1,21 @@
-package com.example.moneyapp.transaction;
+package com.example.moneyapp.entity;
 
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
-@EntityListeners(AuditingEntityListener.class)
-public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Transaction extends BaseEntity {
     private Double amount;
     private String type;
     private Integer categoryId;
     private Integer accountId;
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    private Date updatedAt;
 
-    public Transaction(Integer id, Double amount, String type, Integer categoryId, Integer accountId) {
-        this.id = id;
+    public Transaction(Integer id, Date createdAt, Date updatedAt, Double amount, String type, Integer categoryId, Integer accountId) {
+        super(id, createdAt, updatedAt);
         this.amount = amount;
         this.type = type;
         this.categoryId = categoryId;
@@ -34,14 +23,6 @@ public class Transaction {
     }
 
     public Transaction() { }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Double getAmount() {
         return amount;

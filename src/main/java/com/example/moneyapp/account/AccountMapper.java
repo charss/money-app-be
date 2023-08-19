@@ -1,6 +1,6 @@
 package com.example.moneyapp.account;
 
-import com.example.moneyapp.user.User;
+import com.example.moneyapp.entity.Account;
 import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
@@ -13,7 +13,7 @@ public class AccountMapper {
         return new AccountDto(
                 account.getId(),
                 account.getName(),
-                account.getUser_id(),
+                account.getUserId(),
                 OffsetDateTime.ofInstant(account.getCreatedAt().toInstant(), ZoneId.systemDefault()),
                 OffsetDateTime.ofInstant(account.getUpdatedAt().toInstant(), ZoneId.systemDefault())
         );

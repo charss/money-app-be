@@ -1,5 +1,6 @@
 package com.example.moneyapp.account;
 
+import com.example.moneyapp.entity.Account;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,8 @@ public class AccountService {
 
         Account newAccount = new Account();
 
-        newAccount.setUser_id(userId);
+        newAccount.setUserId(userId);
         newAccount.setName(name);
-
-
         return this.accountRepo.save(newAccount);
     }
 
@@ -47,7 +46,7 @@ public class AccountService {
             return new AccountDto(
                     id,
                     account.getName(),
-                    account.getUser_id(),
+                    account.getUserId(),
                     OffsetDateTime.ofInstant(account.getCreatedAt().toInstant(), ZoneId.systemDefault()),
                     OffsetDateTime.ofInstant(account.getUpdatedAt().toInstant(), ZoneId.systemDefault())
             );

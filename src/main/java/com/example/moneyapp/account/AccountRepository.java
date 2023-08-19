@@ -1,5 +1,6 @@
 package com.example.moneyapp.account;
 
+import com.example.moneyapp.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

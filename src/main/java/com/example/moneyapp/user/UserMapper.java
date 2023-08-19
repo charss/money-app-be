@@ -1,14 +1,10 @@
 package com.example.moneyapp.user;
 
+import com.example.moneyapp.entity.User;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Component
 class UserMapper {

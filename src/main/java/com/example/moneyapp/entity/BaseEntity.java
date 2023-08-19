@@ -1,23 +1,23 @@
-package com.example.moneyapp.account;
+package com.example.moneyapp.entity;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.SQLInsert;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
-
-@Entity
-@Table(name = "accounts")
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class Account {
+public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private Integer userId;
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
@@ -25,15 +25,13 @@ public class Account {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    public Account(Integer id, String name, Integer userId, Date createdAt, Date updatedAt) {
+    public BaseEntity(Integer id, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.name = name;
-        this.userId = userId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public Account() { }
+    public BaseEntity() {}
 
     public Integer getId() {
         return id;
@@ -41,30 +39,6 @@ public class Account {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getUser_id() {
-        return userId;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.userId = user_id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public Date getCreatedAt() {

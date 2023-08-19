@@ -1,5 +1,6 @@
 package com.example.moneyapp.user;
 
+import com.example.moneyapp.entity.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
