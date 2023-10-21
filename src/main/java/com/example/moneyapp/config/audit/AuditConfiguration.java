@@ -11,7 +11,6 @@ public class AuditConfiguration {
     @Bean
     public AuditorAware<String> auditorProvider() {
         AuditorAwareImpl test = new AuditorAwareImpl();
-        System.out.println(test.getCurrentAuditor());
         return test;
     }
 }
