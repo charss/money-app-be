@@ -1,10 +1,11 @@
 package com.example.moneyapp.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -12,13 +13,9 @@ public class Category extends BaseEntity {
     private String name;
     private Integer userId;
 
-    public Category(Integer id, Date createdAt, Date updatedAt, String name, Integer userId) {
-        super(id, createdAt, updatedAt);
-        this.name = name;
-        this.userId = userId;
-    }
-
-    public Category() { }
+    @OneToMany(mappedBy = "category")
+    @JsonManagedReference(value = "transaction-category")
+    private List<Transaction> transactions;
 
     public String getName() {
         return name;
@@ -34,5 +31,13 @@ public class Category extends BaseEntity {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }

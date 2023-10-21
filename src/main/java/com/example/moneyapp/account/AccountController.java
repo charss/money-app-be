@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -36,6 +37,12 @@ public class AccountController {
                 .collect(toList());
     }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Optional<AccountDto> findById(@PathVariable(value = "id") Integer id) {
+        return Optional.of(this.accountMapper.toDto(this.accountRepo.getReferenceById(id)));
+    }
+
     @PostMapping
     public ResponseEntity<?> add(@RequestBody CreateAccountDto account) {
         return new ResponseEntity<>(this.accountService.newAccount(account), HttpStatus.CREATED);
@@ -48,6 +55,12 @@ public class AccountController {
                 .stream()
                 .map(accountMapper::toDto)
                 .collect(toList());
+    }
+
+    @GetMapping("/total")
+    @ResponseBody
+    public List<AccountWithTotalDto> listAllWithTotal() {
+        return this.accountService.getAllAccountWithTotal();
     }
 
     @PutMapping("/{id}/update")

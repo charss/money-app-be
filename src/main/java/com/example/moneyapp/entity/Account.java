@@ -1,24 +1,20 @@
 package com.example.moneyapp.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
 public class Account extends BaseEntity {
     private String name;
     private Integer userId;
-
-    public Account(Integer id, Date createdAt, Date updatedAt, String name, Integer userId) {
-        super(id, createdAt, updatedAt);
-        this.name = name;
-        this.userId = userId;
-    }
-
-    public Account() {}
+    @OneToMany(mappedBy = "account")
+    @JsonManagedReference(value = "transaction-account")
+    private List<Transaction> transactions;
 
     public String getName() {
         return name;
@@ -34,5 +30,14 @@ public class Account extends BaseEntity {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public Account setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+        return this;
     }
 }

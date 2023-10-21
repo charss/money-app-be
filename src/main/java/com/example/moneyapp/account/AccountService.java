@@ -1,6 +1,7 @@
 package com.example.moneyapp.account;
 
 import com.example.moneyapp.entity.Account;
+import com.example.moneyapp.entity.Transaction;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,10 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class AccountService {
@@ -54,4 +58,33 @@ public class AccountService {
             return null;
         }
     }
+
+    public List<AccountWithTotalDto> getAllAccountWithTotal() {
+        try {
+            List<Account> accounts = this.accountRepo.findAll();
+
+            return accounts
+                    .stream()
+                    .map(account -> {
+                        double total = 0;
+                        for (int i = 0; i < account.getTransactions().size(); i++) {
+                            Transaction transaction = account.getTransactions().get(i);
+                            Double amount = transaction.getAmount();
+                            if (Objects.equals(transaction.getType(), "Expense")) {
+                                amount *= -1;
+                            }
+                            total += amount;
+                        }
+                        return new AccountWithTotalDto(
+                                account.getId(),
+                                account.getName(),
+                                total
+                        );
+                    })
+                    .collect(toList());
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
+    }
+
 }

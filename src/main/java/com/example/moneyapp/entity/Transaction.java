@@ -1,28 +1,22 @@
 package com.example.moneyapp.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "transactions")
 public class Transaction extends BaseEntity {
     private Double amount;
     private String type;
-    private Integer categoryId;
-    private Integer accountId;
-
-    public Transaction(Integer id, Date createdAt, Date updatedAt, Double amount, String type, Integer categoryId, Integer accountId) {
-        super(id, createdAt, updatedAt);
-        this.amount = amount;
-        this.type = type;
-        this.categoryId = categoryId;
-        this.accountId = accountId;
-    }
-
-    public Transaction() { }
+    @ManyToOne
+    @JoinColumn(name="account_id")
+    @JsonBackReference(value = "transaction-account")
+    private Account account;
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    @JsonBackReference(value = "transaction-category")
+    private Category category;
 
     public Double getAmount() {
         return amount;
@@ -40,19 +34,29 @@ public class Transaction extends BaseEntity {
         this.type = type;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public Transaction setAccount(Account account) {
+        this.account = account;
+        return this;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "amount=" + amount +
+                ", type='" + type + '\'' +
+                ", account=" + account +
+                '}';
     }
 }

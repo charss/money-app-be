@@ -24,13 +24,17 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
-    public List<CategoryDto> listAll() {
-        return this.categoryRepo.findAll()
-                .stream()
-                .map(mapper::toDto)
-                .collect(toList());
-    }
+//    @GetMapping
+//    public List<CategoryDto> listAll() {
+//        return this.categoryRepo.findAll()
+//                .stream()
+//                .map(mapper::toDto)
+//                .collect(toList());
+//    }
+//    @GetMapping("/total")
+//    public List<CategoryWithTotalDto> listAllWithTotal() {
+//        return this.categoryService.getAllCategoryWithTotal();
+//    }
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Category category) {
