@@ -29,7 +29,7 @@ public class AccountController {
 
     @GetMapping
     @ResponseBody
-    public List<AccountDto> getUsers() {
+    public List<AccountDto> listAllAccounts() {
         return accountRepo.findAll()
                 .stream()
                 .map(accountMapper::toDto)
