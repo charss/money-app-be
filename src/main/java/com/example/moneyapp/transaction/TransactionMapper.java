@@ -16,6 +16,7 @@ public class TransactionMapper {
                 transaction.getType(),
                 transaction.getAccount().getName(),
 //                transaction.getCategory().getName(),
+                OffsetDateTime.ofInstant(transaction.getTransactionDate().toInstant(), ZoneId.systemDefault()),
                 OffsetDateTime.ofInstant(transaction.getCreatedAt().toInstant(), ZoneId.systemDefault()),
                 OffsetDateTime.ofInstant(transaction.getUpdatedAt().toInstant(), ZoneId.systemDefault())
         );

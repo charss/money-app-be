@@ -2,13 +2,8 @@ package com.example.moneyapp.transaction;
 
 import com.example.moneyapp.account.AccountRepository;
 import com.example.moneyapp.category.CategoryRepository;
-import com.example.moneyapp.entity.Account;
-import com.example.moneyapp.entity.Category;
 import com.example.moneyapp.entity.Transaction;
-import com.example.moneyapp.user.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +21,13 @@ public class TransactionController {
     private AccountRepository accountRepo;
     private CategoryRepository categoryRepo;
 
-    public TransactionController(TransactionRepository transactionRepo, TransactionMapper transactionMapper, TransactionService transactionService, AccountRepository accountRepo, CategoryRepository categoryRepo) {
+    public TransactionController(
+            TransactionRepository transactionRepo,
+            TransactionMapper transactionMapper,
+            TransactionService transactionService,
+            AccountRepository accountRepo,
+            CategoryRepository categoryRepo)
+    {
         this.transactionRepo = transactionRepo;
         this.transactionMapper = transactionMapper;
         this.transactionService = transactionService;
@@ -127,5 +128,10 @@ public class TransactionController {
 //        System.out.println(transaction);
 
 //        return new ResponseEntity<>(this.transactionRepo.save(transaction), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}/update-date")
+    public TransactionDto updateTransactionDate(@PathVariable(value = "id") Integer id, @RequestBody Transaction transaction) {
+        return this.transactionService.updateTransactionDate(id, transaction);
     }
 }
