@@ -11,6 +11,7 @@ import java.time.ZoneId;
 public class TransactionMapper {
     public TransactionDto toDto(Transaction transaction) {
         return new TransactionDto(
+                transaction.getId(),
                 transaction.getAmount(),
                 transaction.getType(),
                 transaction.getAccount().getName(),

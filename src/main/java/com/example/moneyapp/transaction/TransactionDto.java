@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.OffsetDateTime;
 
 public record TransactionDto(
+        Integer id,
         Double amount,
         String type,
 //        String categoryName,
