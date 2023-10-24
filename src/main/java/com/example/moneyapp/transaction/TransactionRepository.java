@@ -10,5 +10,5 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 //    List<Transaction> findByCategoryId(Integer categoryId);
     List<Transaction> findByAccountId(Integer accountId);
-    List<Transaction> findByType(String type);
+//    List<Transaction> findByType(String type);
 }

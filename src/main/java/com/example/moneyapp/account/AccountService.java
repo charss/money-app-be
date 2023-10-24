@@ -70,7 +70,7 @@ public class AccountService {
                         for (int i = 0; i < account.getTransactions().size(); i++) {
                             Transaction transaction = account.getTransactions().get(i);
                             Double amount = transaction.getAmount();
-                            if (Objects.equals(transaction.getType(), "Expense")) {
+                            if (Objects.equals(transaction.getCategory().getType(), "expense")) {
                                 amount *= -1;
                             }
                             total += amount;

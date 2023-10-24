@@ -11,7 +11,6 @@ import java.util.Date;
 @Table(name = "transactions")
 public class Transaction extends BaseEntity {
     private Double amount;
-    private String type;
     @ManyToOne
     @JoinColumn(name="account_id")
     @JsonBackReference(value = "transaction-account")
@@ -31,14 +30,6 @@ public class Transaction extends BaseEntity {
 
     public void setAmount(Double amount) {
         this.amount = amount;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Account getAccount() {
@@ -70,7 +61,6 @@ public class Transaction extends BaseEntity {
     public String toString() {
         return "Transaction{" +
                 "amount=" + amount +
-                ", type='" + type + '\'' +
                 ", account=" + account +
                 ", category=" + category +
                 ", transactionDate=" + transactionDate +

@@ -40,7 +40,6 @@ public class TransactionService {
         transaction.setAccount(account);
         transaction.setCategory(category);
         transaction.setAmount(createTransactionDto.amount());
-        transaction.setType(createTransactionDto.type());
 
         this.transactionRepo.save(transaction);
     }

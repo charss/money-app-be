@@ -79,14 +79,14 @@ public class TransactionController {
                 .toList();
     }
 
-    @GetMapping("/type/{type}")
-    @ResponseBody
-    public List<TransactionDto> getTransactionsByType(@PathVariable(value="type") String type) {
-        return transactionRepo.findByType(type)
-                .stream()
-                .map(transactionMapper::toDto)
-                .collect(toList());
-    }
+//    @GetMapping("/type/{type}")
+//    @ResponseBody
+//    public List<TransactionDto> getTransactionsByType(@PathVariable(value="type") String type) {
+//        return transactionRepo.findByType(type)
+//                .stream()
+//                .map(transactionMapper::toDto)
+//                .collect(toList());
+//    }
 
     @PostMapping
     @ResponseBody

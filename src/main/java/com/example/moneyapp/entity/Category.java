@@ -12,6 +12,7 @@ import java.util.List;
 public class Category extends BaseEntity {
     private String name;
     private Integer userId;
+    private String type;
 
     @OneToMany(mappedBy = "category")
     @JsonManagedReference(value = "transaction-category")
@@ -31,6 +32,14 @@ public class Category extends BaseEntity {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<Transaction> getTransactions() {

@@ -10,6 +10,7 @@ public record CategoryDto(
         Integer id,
         String name,
         Integer userId,
+        String type,
         Set<Transaction> transaction,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
         OffsetDateTime createdAt,

@@ -23,6 +23,7 @@ public class CategoryMapper {
                 category.getId(),
                 category.getName(),
                 category.getUserId(),
+                category.getType(),
                 transactions,
                 OffsetDateTime.ofInstant(category.getCreatedAt().toInstant(), ZoneId.systemDefault()),
                 OffsetDateTime.ofInstant(category.getUpdatedAt().toInstant(), ZoneId.systemDefault())
